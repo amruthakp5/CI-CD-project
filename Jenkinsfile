@@ -6,7 +6,13 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/amruthakp5/CI-CD-project.git'
+                checkout([
+                    $class: 'GitSCM',
+                     branches: [[name: '*/main']], // Specify 'main' branch
+                     userRemoteConfigs: [[
+                     url: 'https://github.com/amruthakp5/CI-CD-project.git',
+            ]]
+        ])
             }
         }
         stage('Build Application') {
